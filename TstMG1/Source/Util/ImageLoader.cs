@@ -17,13 +17,13 @@ namespace GameSystem
 				using (var fileStream = new FileStream(currentDir + file, FileMode.Open))
 					texture = Texture2D.FromStream(gdm.GraphicsDevice, fileStream);
 			}
-			catch ( System.Exception ex )
+			catch ( Exception ex )
 			{
 				var strDebug =  "file: " + file + "\r\n" +
 								"path: " + currentDir + "\r\n" +
 								ex.ToString();
 
-				throw new System.Exception(strDebug);
+				throw new Exception(strDebug);
 			}
 		}
 
@@ -45,43 +45,29 @@ namespace GameSystem
         {
             var lst = new List<Texture2D>();
             var log = new List<string>();
-
-
+            
             try
             {
                 int maskSize = frames.ToString().Length;
 
-                string path = currentDir + prefix + "_min.png";
+                string pathPNG = currentDir + prefix + "_min.png";
                 string pathMap = currentDir + prefix + "_min.txt";
 
-                using (var fileStream = new FileStream(path, FileMode.Open))
+                using (var fileStream = new FileStream(pathPNG, FileMode.Open))
                 {
                     using (var maxTexture = Texture2D.FromStream(gdm.GraphicsDevice, fileStream))
                     {
-                        log.Add("pathMap");
-                        log.Add(pathMap);
-
                         using (var sr = new StreamReader(pathMap))
                         {
-                            //0,0,105,110;105,0,105,110;
-                            var contents = sr.ReadToEnd();
-
-                            log.Add("contents");
-                            log.Add(contents);
-
+                            var contents = sr.ReadToEnd();  //0,0,105,110;105,0,105,110;
                             var lstMap = contents.Split(';');
 
-                            for (int t = 1; t <= frames; ++t)
-                            {
-                                //0,0,105,110
-                                var contentItem = lstMap[t - 1];
-
-                                log.Add("contentItem");
-                                log.Add(contentItem);
-
+                            for (int indexImg = 1; indexImg <= frames; ++indexImg)
+                            {                                
+                                var contentItem = lstMap[indexImg - 1]; //0,0,105,110
                                 var rectStr = contentItem.Split(',');
 
-                                var rect = new Rectangle(Convert.ToInt32(rectStr[0]),  // X
+                                var rect = new Rectangle( Convert.ToInt32(rectStr[0]),  // X
                                                           Convert.ToInt32(rectStr[1]),  // Y
                                                           Convert.ToInt32(rectStr[2]),  // WIDTH
                                                           Convert.ToInt32(rectStr[3])); // HEIGHT
@@ -98,11 +84,6 @@ namespace GameSystem
                         }
                     }
                 }
-
-                //for (int t = 1; t <= frames; ++t)
-                //  using (var fileStream = new FileStream(path + t.ToString("".PadLeft(maskSize, '0')) + ".png", FileMode.Open))
-                //    lst.Add(Texture2D.FromStream(gdm.GraphicsDevice, fileStream));
-
             }
             catch (SystemException ex)
             {

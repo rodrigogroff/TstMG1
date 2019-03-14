@@ -10,14 +10,12 @@ namespace GameSystem
 
 			switch (shipSkin)
 			{
-				case PlayerSkin.White: 
+				case PlayerSkin.White:
                     //lstSpaceShipImg = lib.LoadImageSequence("Players\\Blue\\cw_blue", 30, ref go.gdm);        // 78 milis
                     lstSpaceShipImg = lib.LoadImageMappedSequence("Players\\Blue\\cw_blue", 30, ref go.gdm);    // 63 milis
                     break;
 
-
                 case PlayerSkin.Red:
-              //      lstSpaceShipImg = lib.LoadImageSequence("Players\\Red\\cw_red", 30, ref go.gdm);
                     lstSpaceShipImg = lib.LoadImageMappedSequence("Players\\Red\\cw_red", 30, ref go.gdm);
                     break;
 			}
