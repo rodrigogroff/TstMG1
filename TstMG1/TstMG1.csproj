@@ -41,9 +41,41 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Background\BgPanel.cs" />
+    <Compile Include="Source\Background\Collision\BgBlock.cs" />
+    <Compile Include="Source\Background\ParallaxPanel.cs" />
+    <Compile Include="Source\Base\Main\Functions\Load.cs" />
+    <Compile Include="Source\Base\Main\Functions\Localization.cs" />
+    <Compile Include="Source\Base\Main\GameObject.cs" />
+    <Compile Include="Source\Base\Main\Types.cs" />
+    <Compile Include="Source\Enemy\Enemy.cs" />
+    <Compile Include="Source\GameLooper.cs" />
+    <Compile Include="Source\GameOptions.cs" />
+    <Compile Include="Source\Player\Extras\FollowOption.cs" />
+    <Compile Include="Source\Player\Extras\PlayerPlasma.cs" />
+    <Compile Include="Source\Player\Functions\Collision.cs" />
+    <Compile Include="Source\Player\Functions\Draw.cs" />
+    <Compile Include="Source\Player\Functions\Fire.cs" />
+    <Compile Include="Source\Player\Functions\Input.cs" />
+    <Compile Include="Source\Player\Functions\LoadContent.cs" />
+    <Compile Include="Source\Player\Functions\Update.cs" />
+    <Compile Include="Source\Player\Player.cs" />
+    <Compile Include="Source\Player\Types.cs" />
+    <Compile Include="Source\Util\ImageLibrary.cs" />
+    <Compile Include="Source\Util\ImageLoader.cs" />
+    <Compile Include="Source\World\Base\BaseWorld.cs" />
+    <Compile Include="Source\World\Base\Collision.cs" />
+    <Compile Include="Source\World\Base\Draw.cs" />
+    <Compile Include="Source\World\Base\Update.cs" />
+    <Compile Include="Source\World\Map\Functions\CreateBg.cs" />
+    <Compile Include="Source\World\Map\Functions\CreateEnemy.cs" />
+    <Compile Include="Source\World\Map\Functions\CreateEvent.cs" />
+    <Compile Include="Source\World\Map\Functions\Input.cs" />
+    <Compile Include="Source\World\Map\Functions\LoadEvents.cs" />
+    <Compile Include="Source\World\Map\Functions\MapEntities.cs" />
+    <Compile Include="Source\World\Map\GameMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -53,14 +85,172 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlackAndNeonGreen\CosmicWasp_BaseColor.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlackAndNeonGreen\CosmicWasp_Diffuse.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlackAndNeonGreen\CosmicWasp_Glossiness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlackAndNeonGreen\CosmicWasp_Metallic.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlackAndNeonGreen\CosmicWasp_Normal.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlackAndNeonGreen\CosmicWasp_Roughness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlackAndNeonGreen\CosmicWasp_Specular.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\CosmicWasp_BaseColor.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\CosmicWasp_Diffuse.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\CosmicWasp_Glossiness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\CosmicWasp_Metallic.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\CosmicWasp_Normal.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\CosmicWasp_Roughness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\CosmicWasp_Specular.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\GhostFlame\CosmicWasp_BaseColor.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\GhostFlame\CosmicWasp_BaseColorAlt.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\GhostFlame\CosmicWasp_Diffuse.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\GhostFlame\CosmicWasp_Glossiness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\GhostFlame\CosmicWasp_Metallic.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\GhostFlame\CosmicWasp_Normal.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\GhostFlame\CosmicWasp_Roughness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\GhostFlame\CosmicWasp_Specular.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\OrangeGraySilver\CosmicWasp_BaseColor.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\OrangeGraySilver\CosmicWasp_Diffuse.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\OrangeGraySilver\CosmicWasp_Glossiness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\OrangeGraySilver\CosmicWasp_Metallic.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\OrangeGraySilver\CosmicWasp_Normal.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\OrangeGraySilver\CosmicWasp_Roughness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\OrangeGraySilver\CosmicWasp_Specular.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\CosmicWasp_BaseColor.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\CosmicWasp_Diffuse.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\CosmicWasp_Glossiness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\CosmicWasp_Metallic.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\CosmicWasp_Normal.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\CosmicWasp_Roughness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\CosmicWasp_Specular.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\YellowAndBlack\CosmicWasp_BaseColor.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\YellowAndBlack\CosmicWasp_Diffuse.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\YellowAndBlack\CosmicWasp_Glossiness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\YellowAndBlack\CosmicWasp_Metallic.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\YellowAndBlack\CosmicWasp_Normal.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\YellowAndBlack\CosmicWasp_Roughness.png" />
+    <Content Include="Content\3d\CosmicWasp\CW_Textures\YellowAndBlack\CosmicWasp_Specular.png" />
+    <Content Include="Content\Images\Bg\bg.png" />
+    <Content Include="Content\Images\Bg\bg1.png" />
+    <Content Include="Content\Images\Bg\bg2.png" />
+    <Content Include="Content\Images\Bg\bg3.png" />
+    <Content Include="Content\Images\Bg\brick1.png" />
+    <Content Include="Content\Images\Bg\brick2.png" />
+    <Content Include="Content\Images\Enemy\enemy1.png" />
+    <Content Include="Content\Images\Other\pause.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue01.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue02.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue03.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue04.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue05.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue06.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue07.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue08.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue09.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue10.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue11.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue12.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue13.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue14.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue15.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue16.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue17.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue18.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue19.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue20.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue21.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue22.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue23.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue24.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue25.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue26.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue27.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue28.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue29.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue30.png" />
+    <Content Include="Content\Images\Players\option.png" />
+    <Content Include="Content\Images\Players\plasmaShot.png" />
+    <Content Include="Content\Images\Players\plasmaShotBlue.png" />
+    <Content Include="Content\Images\Players\Red\cw_red01.png" />
+    <Content Include="Content\Images\Players\Red\cw_red02.png" />
+    <Content Include="Content\Images\Players\Red\cw_red03.png" />
+    <Content Include="Content\Images\Players\Red\cw_red04.png" />
+    <Content Include="Content\Images\Players\Red\cw_red05.png" />
+    <Content Include="Content\Images\Players\Red\cw_red06.png" />
+    <Content Include="Content\Images\Players\Red\cw_red07.png" />
+    <Content Include="Content\Images\Players\Red\cw_red08.png" />
+    <Content Include="Content\Images\Players\Red\cw_red09.png" />
+    <Content Include="Content\Images\Players\Red\cw_red10.png" />
+    <Content Include="Content\Images\Players\Red\cw_red11.png" />
+    <Content Include="Content\Images\Players\Red\cw_red12.png" />
+    <Content Include="Content\Images\Players\Red\cw_red13.png" />
+    <Content Include="Content\Images\Players\Red\cw_red14.png" />
+    <Content Include="Content\Images\Players\Red\cw_red15.png" />
+    <Content Include="Content\Images\Players\Red\cw_red16.png" />
+    <Content Include="Content\Images\Players\Red\cw_red17.png" />
+    <Content Include="Content\Images\Players\Red\cw_red18.png" />
+    <Content Include="Content\Images\Players\Red\cw_red19.png" />
+    <Content Include="Content\Images\Players\Red\cw_red20.png" />
+    <Content Include="Content\Images\Players\Red\cw_red21.png" />
+    <Content Include="Content\Images\Players\Red\cw_red22.png" />
+    <Content Include="Content\Images\Players\Red\cw_red23.png" />
+    <Content Include="Content\Images\Players\Red\cw_red24.png" />
+    <Content Include="Content\Images\Players\Red\cw_red25.png" />
+    <Content Include="Content\Images\Players\Red\cw_red26.png" />
+    <Content Include="Content\Images\Players\Red\cw_red27.png" />
+    <Content Include="Content\Images\Players\Red\cw_red28.png" />
+    <Content Include="Content\Images\Players\Red\cw_red29.png" />
+    <Content Include="Content\Images\Players\Red\cw_red30.png" />
+    <Content Include="Content\Maps\w1.txt" />
+    <Content Include="Content\Maps\w1_map.txt" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\3d\CosmicWasp\.mayaSwatches\cw_blue.mb.swatches" />
+    <None Include="Content\3d\CosmicWasp\CosmicWasp.FBX" />
+    <None Include="Content\3d\CosmicWasp\CosmicWasp.obj" />
+    <None Include="Content\3d\CosmicWasp\cw_blue.mb" />
+    <None Include="Content\3d\CosmicWasp\cw_ghost.mb" />
+    <None Include="Content\3d\CosmicWasp\cw_green.mb" />
+    <None Include="Content\3d\CosmicWasp\cw_red.mb" />
+    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Diffuse.png_hcm.swatch" />
+    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Normal.png_hcm.swatch" />
+    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Specular.png_hcm.swatch" />
+    <None Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\.mayaSwatches\CosmicWasp_BaseColor.png_hcm.swatch" />
+    <None Include="Content\bin\DesktopGL\Music\Axelay_Kick_My_Axe_OC_ReMix.ogg" />
+    <None Include="Content\bin\DesktopGL\Music\Axelay_Kick_My_Axe_OC_ReMix.xnb" />
+    <None Include="Content\Images\Players\plasmaShot.psd" />
+    <None Include="Content\Images\Players\plasmaShotBlue.psd" />
+    <None Include="Content\Music\Axelay_Kick_My_Axe_OC_ReMix.ogg" />
+    <None Include="Content\obj\DesktopGL\.mgcontent" />
+    <None Include="Content\obj\DesktopGL\Music\Axelay_Kick_My_Axe_OC_ReMix.mgcontent" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\World\Rounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rmdir /s "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content"
+
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images"
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Bg"
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Enemy"
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Other"
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players"
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Blue"
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Red"
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Maps"
+
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Maps\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Maps"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Bg\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Bg\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Enemy\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Enemy\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Other\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Other\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Blue\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Red\*.png"
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

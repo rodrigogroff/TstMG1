@@ -1,0 +1,31 @@
+﻿
+% begin
+{ type: start; world_x_pos: 50;  world_y_pos: 50; p1_x_pos: 100 ;  p1_y_pos: 100 ; 	p2_x_pos: 350; 	p2_y_pos: 150 }
+
+# ------------------------------------------------------------ 
+# screen movements [BEGIN]
+
+% movement
+{ type: speed; frame: 100 ; world_x_speed: 1; world_y_speed: 0 }
+
+
+% movement
+{ type: speed; frame: 1400 ; world_x_speed: 8; world_y_speed: 0 }
+
+
+# screen movements [END]
+
+
+# ------------------------------------------------------------ 
+# backgrounds [BEGIN]
+
+@ teste 
+{ sub: 2; image: bg.png; x_pos: 0 ; y_pos: 0 ; width:1920; height:1080 ; layer: 4 }
+
+@ teste usando span
+{ sub: 1; image: brick1.png; x_pos: 1200 ; y_pos: 300 ; colspan: 10; rowspan: 1; width:153; height:135 }
+
+@ teste de bloqueio de tiros
+{ sub: 3; image: brick2.png; x_pos: 900 ; y_pos: 300 ; collision: 0,0,135,135 }
+
+# backgrounds [END]
