@@ -165,6 +165,8 @@
     <Content Include="Content\Images\Players\Blue\cw_blue28.png" />
     <Content Include="Content\Images\Players\Blue\cw_blue29.png" />
     <Content Include="Content\Images\Players\Blue\cw_blue30.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue_min.png" />
+    <Content Include="Content\Images\Players\Blue\cw_blue_min.txt" />
     <Content Include="Content\Images\Players\option.png" />
     <Content Include="Content\Images\Players\plasmaShot.png" />
     <Content Include="Content\Images\Players\plasmaShotBlue.png" />
@@ -198,6 +200,8 @@
     <Content Include="Content\Images\Players\Red\cw_red28.png" />
     <Content Include="Content\Images\Players\Red\cw_red29.png" />
     <Content Include="Content\Images\Players\Red\cw_red30.png" />
+    <Content Include="Content\Images\Players\Red\cw_red_min.png" />
+    <Content Include="Content\Images\Players\Red\cw_red_min.txt" />
     <Content Include="Content\Maps\w1.txt" />
     <Content Include="Content\Maps\w1_map.txt" />
     <Content Include="Icon.ico" />
@@ -232,6 +236,7 @@
   <PropertyGroup>
     <PostBuildEvent>rmdir /s "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content"
 
+mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content"
 mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images"
 mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Bg"
 mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Enemy"
@@ -243,11 +248,18 @@ mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Maps"
 
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Maps\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Maps"
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Bg\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Bg\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Bg\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Bg\*.txt"
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Enemy\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Enemy\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Enemy\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Enemy\*.txt"
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Other\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Other\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Other\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Other\*.txt"
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\*.txt"
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Blue\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Blue\*.txt"
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Red\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Red\*.txt"
+
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -28,6 +28,8 @@ namespace GameSystem
 					NeedsUpdate = false,
 					NeedsTermination = false;
 
+        public List<string> log = new List<string>();
+
 		public GameObject(BaseWorld _w)
 		{
 			MyWorld = _w;
@@ -45,5 +47,13 @@ namespace GameSystem
 		{
 			sb.Draw(MyBaseImage, GetLocalPosition(), opaqueColor);
 		}
+
+        public void DumpLog()
+        {
+            var strFinal = "";
+            foreach (var item in log)
+                strFinal += item + "\r\n";
+            throw (new System.Exception(strFinal));
+        }
 	}
 }

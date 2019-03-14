@@ -18,28 +18,42 @@ namespace ImageProc
 
             Console.WriteLine("-----------------");
             Console.WriteLine(currentDir);
-            Console.WriteLine("-----------------");
+            Console.WriteLine("----------------- Players\\Blue");
             Console.WriteLine();
 
             // -----------------------------------------
             // minimizar numero de arquivos em um
             // -----------------------------------------
 
-            string dir = currentDir + "Players\\Blue",
+            Console.WriteLine(">> Diretorio de Lote de arquivos destino (Players\\Blue)");
+            var dest = Console.ReadLine();  // "Players\\Blue"
+
+            string  dir = currentDir + dest,
                     prefix = "cw_blue";
 
-            var sample = new Bitmap(dir + "\\" + prefix + "01.png");
+            Console.WriteLine(dir);
 
-            string fileTargetName = dir + "\\" + prefix + "_min.png";
-            string fileTargetNameMap = dir + "\\" + prefix + "_min.txt";
+            if (!Directory.Exists (dir))
+            {
+                Console.WriteLine("Diretório não existe");
+                return;
+            }
+
+            Console.WriteLine(">> Prefixo do arquivo");
+
+            dest = Console.ReadLine();
+
+            prefix = dest;
+
+            var sample = new Bitmap(dir + "\\" + prefix + (new DirectoryInfo(dir).GetFiles().Length < 100 ? "01.png" : "0001.png"));
+
+            string  fileTargetName = dir + "\\" + prefix + "_min.png",
+                    fileTargetNameMap = dir + "\\" + prefix + "_min.txt";
 
             Console.WriteLine(" >> target mini => " + fileTargetName);
 
-            if (File.Exists(fileTargetName))
-                File.Delete(fileTargetName);
-
-            if (File.Exists(fileTargetNameMap))
-                File.Delete(fileTargetNameMap);
+            if (File.Exists(fileTargetName)) File.Delete(fileTargetName);
+            if (File.Exists(fileTargetNameMap)) File.Delete(fileTargetNameMap);
 
             int totFrames = new DirectoryInfo(dir).GetFiles().Length,
                 widthPadrao = sample.Width,
@@ -70,15 +84,10 @@ namespace ImageProc
                         Rectangle destRegion = new Rectangle((i - 1) * widthPadrao, 0, widthPadrao, totHeight);
                         Rectangle srcRegion = new Rectangle(0, 0, widthPadrao, totHeight);
 
-                        sw.Write("(");
-                        sw.Write(destRegion.X.ToString());
-                        sw.Write(",");
-                        sw.Write(destRegion.Y.ToString());
-                        sw.Write(",");
-                        sw.Write(destRegion.Width.ToString());
-                        sw.Write(",");
-                        sw.Write(destRegion.Height.ToString());
-                        sw.Write(");");
+                        sw.Write(destRegion.X.ToString()); sw.Write(",");
+                        sw.Write(destRegion.Y.ToString()); sw.Write(",");
+                        sw.Write(destRegion.Width.ToString()); sw.Write(",");
+                        sw.Write(destRegion.Height.ToString()); sw.Write(";");
 
                         grD.DrawImage(sampleItem, destRegion, srcRegion, GraphicsUnit.Pixel);
                     }
