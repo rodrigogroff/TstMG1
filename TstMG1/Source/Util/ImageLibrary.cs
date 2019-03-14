@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameUtil
+namespace GameSystem
 {
 	public class ImageLibrary
 	{

@@ -1,5 +1,5 @@
 ﻿
-namespace GameUtil
+namespace GameSystem
 {
 	public enum GameObjectType
 	{

@@ -1,5 +1,5 @@
 ﻿
-namespace GameObjects
+namespace GameSystem
 {
 	public enum PlayerSelection
 	{

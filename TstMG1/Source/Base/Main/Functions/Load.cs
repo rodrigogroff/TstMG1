@@ -1,6 +1,5 @@
-﻿using GameObjects;
-
-namespace GameUtil
+﻿
+namespace GameSystem
 {
 	public partial class GameObject 
 	{

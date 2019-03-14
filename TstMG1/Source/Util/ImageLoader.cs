@@ -1,10 +1,9 @@
 ﻿using System.IO;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameUtil
+namespace GameSystem
 {
 	public class ImageLoader
 	{

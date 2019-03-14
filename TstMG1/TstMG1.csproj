@@ -52,7 +52,6 @@
     <Compile Include="Source\Base\Main\Types.cs" />
     <Compile Include="Source\Enemy\Enemy.cs" />
     <Compile Include="Source\GameLooper.cs" />
-    <Compile Include="Source\GameOptions.cs" />
     <Compile Include="Source\Player\Extras\FollowOption.cs" />
     <Compile Include="Source\Player\Extras\PlayerPlasma.cs" />
     <Compile Include="Source\Player\Functions\Collision.cs" />

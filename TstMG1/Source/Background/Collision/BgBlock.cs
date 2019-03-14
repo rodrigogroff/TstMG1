@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-using GameUtil;
-
-namespace GameObjects
+namespace GameSystem
 {
 	public class BgBlock : GameObject
 	{

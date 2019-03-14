@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gujitsu
+namespace GameSystem
 {
     public static class Program
     {
@@ -8,7 +8,9 @@ namespace Gujitsu
         static void Main()
         {
             using (var game = new GameLooper())
+            {
                 game.Run();
+            }                
         }
     }
 }

@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Globalization;
 
-namespace GameObjects
+namespace GameSystem
 {
 	public partial class GameMap : BaseWorld
 	{

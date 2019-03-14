@@ -1,6 +1,5 @@
-﻿using GameUtil;
-
-namespace GameObjects
+﻿
+namespace GameSystem
 {
 	public class ParallaxPanel : GameObject
 	{

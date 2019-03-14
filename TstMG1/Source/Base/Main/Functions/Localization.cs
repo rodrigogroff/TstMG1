@@ -1,8 +1,7 @@
 ﻿using System;
-
 using Microsoft.Xna.Framework;
 
-namespace GameUtil
+namespace GameSystem
 {
 	public partial class GameObject 
 	{

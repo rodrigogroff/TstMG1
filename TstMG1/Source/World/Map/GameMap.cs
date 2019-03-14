@@ -1,13 +1,10 @@
 ﻿using System.Linq;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-using GameUtil;
-
-namespace GameObjects
+namespace GameSystem
 {
 	public partial class GameMap : BaseWorld
 	{

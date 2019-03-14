@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-using GameUtil;
-
-namespace GameObjects
+namespace GameSystem
 {
 	public partial class BaseWorld : GameObject
 	{

@@ -1,9 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using GameUtil;
-
-namespace GameObjects
+namespace GameSystem
 {
 	public class PlayerPlasma : GameObject
 	{

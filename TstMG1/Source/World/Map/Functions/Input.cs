@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace GameObjects
+namespace GameSystem
 {
 	public partial class GameMap : BaseWorld
 	{

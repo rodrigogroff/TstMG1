@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 
-using GameUtil;
-
-namespace GameObjects
+namespace GameSystem
 {
 	public partial class BaseWorld : GameObject
 	{

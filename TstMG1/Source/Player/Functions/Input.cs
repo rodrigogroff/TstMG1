@@ -1,9 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-using GameUtil;
-
-namespace GameObjects
+namespace GameSystem
 {
 	public partial class Player : GameObject
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameObjects
+namespace GameSystem
 {
 	public partial class GameMap : BaseWorld
 	{

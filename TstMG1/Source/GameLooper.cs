@@ -1,15 +1,22 @@
 ﻿using System;
 using System.IO;
 using System.Diagnostics;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using GameObjects;
-
-namespace Gujitsu
+namespace GameSystem
 {
-	public class GameLooper : Game
+    public class GameOptions
+    {
+        public GraphicsDeviceManager gdm;
+        public ImageLoader im = new ImageLoader();
+        public ImageLibrary imageLibrary = new ImageLibrary();
+
+        public int virtualWidth = 960,
+                   virtualHeight = 540;
+    }
+
+    public class GameLooper : Game
 	{
 		GameOptions go = new GameOptions();
 
@@ -21,12 +28,12 @@ namespace Gujitsu
 		
 		public GameLooper()
 		{
-			gdm = new GraphicsDeviceManager(this);
+            #region - code - 
+
+            gdm = new GraphicsDeviceManager(this);
 
 			go.gdm = gdm;
-
 			gdm.IsFullScreen = false;
-			gdm.SynchronizeWithVerticalRetrace = true;			
 
 			if (gdm.IsFullScreen)
 			{
@@ -40,11 +47,15 @@ namespace Gujitsu
 			}
 
 			gdm.ApplyChanges();
-		}
-		
-		protected override void Initialize()
+
+            #endregion
+        }
+
+        protected override void Initialize()
 		{
-			try
+            #region - code -
+
+            try
 			{
 				base.Initialize();
 
@@ -60,10 +71,14 @@ namespace Gujitsu
 			{
 				SaveException(ex);
 			}
-		}
+
+            #endregion
+        }
 				
 		protected override void Update(GameTime gameTime)
 		{
+            #region - code - 
+
             if (gameWorld == null)
                 return;
 
@@ -93,11 +108,15 @@ namespace Gujitsu
 			{
 				SaveException(ex);
 			}
-		}
+
+            #endregion
+        }
 		
 		protected override void Draw(GameTime gameTime)
 		{
-			try
+            #region - code - 
+
+            try
 			{
 				// render to virtual console resolution
 				GraphicsDevice.SetRenderTarget(rTarget);
@@ -117,16 +136,22 @@ namespace Gujitsu
 			{
 				SaveException(ex);
 			}
-		}
+
+            #endregion
+        }
 
 		public void SaveException (Exception ex)
 		{
-			var file = "log.txt";
+            #region - code - 
+
+            var file = "log.txt";
 			if (File.Exists(file)) File.Delete(file);
 			using (var s = new StreamWriter(file, false, System.Text.Encoding.Unicode))
 				s.Write(ex.ToString());
 			Process.Start("notepad.exe", file);
 			Exit();
-		}
+
+            #endregion
+        }
 	}
 }
