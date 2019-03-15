@@ -33,9 +33,10 @@ namespace GameSystem
             gdm = new GraphicsDeviceManager(this);
 
 			go.gdm = gdm;
-			gdm.IsFullScreen = false;
+			gdm.IsFullScreen = true;
+            gdm.SynchronizeWithVerticalRetrace = true;
 
-			if (gdm.IsFullScreen)
+            if (gdm.IsFullScreen)
 			{
 				gdm.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
 				gdm.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;

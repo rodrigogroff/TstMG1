@@ -22,7 +22,7 @@ namespace GameSystem
 			curFrame = 14,  // main image star index
 			fireTimer = 1;  // counter 			
 
-		float speed = 5;
+		float speed = 3;
 
 		bool IsAutoFire = false;
 
