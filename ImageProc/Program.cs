@@ -38,7 +38,7 @@ namespace ImageProc
 
         static void Proc (string destino, string prefix )
         {
-            string BaseApp = "TstMG1";
+            string BaseApp = "CrossPlat";
             string currentDir = Directory.GetCurrentDirectory() + "\\" + BaseApp + "\\Content\\Images\\";
             currentDir = currentDir.Replace("ImageProc\\bin\\Release\\", "");
             string dir = currentDir + destino;                    

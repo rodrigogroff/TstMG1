@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TstMG1")]
-[assembly: AssemblyProduct("TstMG1")]
+[assembly: AssemblyTitle("CrossPlat")]
+[assembly: AssemblyProduct("CrossPlat")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5e4759e5-102d-48f5-a5c8-06814473c1ba")]
+[assembly: Guid("1ca50506-0197-4ce3-8038-c90eaf7ecc26")]
 
 // Version information for an assembly consists of the following four values:
 //

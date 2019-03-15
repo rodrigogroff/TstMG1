@@ -9,12 +9,18 @@ namespace GameSystem
 		{
             var kbs = Keyboard.GetState();
 
-            var gps = GamePad.GetState(PlayerIndex.One);			
+            GamePadState gps;
+            
+            gps = GamePad.GetState(PlayerIndex.One);
 
-			if (myPlayer == PlayerSelection.PlayerTwo)
+            if (!gps.IsConnected)
 				gps = GamePad.GetState(PlayerIndex.Two);
+            else if (!gps.IsConnected)
+                gps = GamePad.GetState(PlayerIndex.Three);
+            else if (!gps.IsConnected)
+                gps = GamePad.GetState(PlayerIndex.Four);                       
 
-			IsUp = false; IsDown = false;
+            IsUp = false; IsDown = false;
 
 			bool CanGoUp = false,
 				 CanGoLeft = false,
@@ -63,10 +69,10 @@ namespace GameSystem
 				if (gps.DPad.Right == ButtonState.Pressed) if (CanGoDown) MyGlobalPosition.X += speed;
 				if (gps.DPad.Down == ButtonState.Pressed) { if (CanGoRight) MyGlobalPosition.Y += speed; IsDown = true; }
 
-				if (gps.Buttons.A == ButtonState.Released) PlayerFire();
-				if (gps.Buttons.B == ButtonState.Released) { }
-				if (gps.Buttons.X == ButtonState.Released) { }
-				if (gps.Buttons.Y == ButtonState.Released) { }
+				if (gps.Buttons.A == ButtonState.Pressed) if (!IsAutoFire) { fireTimer = 0; IsAutoFire = true; }
+                if (gps.Buttons.B == ButtonState.Pressed) { }
+				if (gps.Buttons.X == ButtonState.Pressed) { }
+				if (gps.Buttons.Y == ButtonState.Pressed) { }
 			}
 		}
 

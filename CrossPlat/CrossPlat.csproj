@@ -3,35 +3,36 @@
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B3E2D8F5-F9A0-43C4-8D34-8871D7EC66D9}</ProjectGuid>
+    <ProjectGuid>{0A51B030-0488-4C2E-A0F3-93EDF358ED0D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TstMG1</RootNamespace>
-    <AssemblyName>TstMG1</AssemblyName>
+    <RootNamespace>CrossPlat</RootNamespace>
+    <AssemblyName>CrossPlat</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MonoGamePlatform>Windows</MonoGamePlatform>
+    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;LINUX</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <DefineConstants>TRACE;LINUX</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
@@ -52,12 +53,12 @@
     <Compile Include="Source\Base\Main\Types.cs" />
     <Compile Include="Source\Enemy\Enemy.cs" />
     <Compile Include="Source\GameLooper.cs" />
+    <Compile Include="Source\Input\Input.cs" />
     <Compile Include="Source\Player\Extras\FollowOption.cs" />
     <Compile Include="Source\Player\Extras\PlayerPlasma.cs" />
     <Compile Include="Source\Player\Functions\Collision.cs" />
     <Compile Include="Source\Player\Functions\Draw.cs" />
     <Compile Include="Source\Player\Functions\Fire.cs" />
-    <Compile Include="Source\Player\Functions\Input.cs" />
     <Compile Include="Source\Player\Functions\LoadContent.cs" />
     <Compile Include="Source\Player\Functions\Update.cs" />
     <Compile Include="Source\Player\Player.cs" />
@@ -78,10 +79,75 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icon.ico" />
+    <EmbeddedResource Include="Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
+      <Link>x86\SDL2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
+      <Link>x64\SDL2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\soft_oal.dll">
+      <Link>x86\soft_oal.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\soft_oal.dll">
+      <Link>x64\soft_oal.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libSDL2-2.0.so.0">
+      <Link>x86\libSDL2-2.0.so.0</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libSDL2-2.0.so.0">
+      <Link>x64\libSDL2-2.0.so.0</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libopenal.so.1">
+      <Link>x86\libopenal.so.1</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
+      <Link>x64\libopenal.so.1</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
+      <Link>libSDL2-2.0.0.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
+      <Link>libopenal.1.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
+      <Link>MonoGame.Framework.dll.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="app.manifest" />
+    <None Include="Content\3d\CosmicWasp\.mayaSwatches\cw_blue.mb.swatches" />
+    <None Include="Content\3d\CosmicWasp\CosmicWasp.FBX" />
+    <None Include="Content\3d\CosmicWasp\cw_blue.mb" />
+    <None Include="Content\3d\CosmicWasp\cw_ghost.mb" />
+    <None Include="Content\3d\CosmicWasp\cw_green.mb" />
+    <None Include="Content\3d\CosmicWasp\cw_red.mb" />
+    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Diffuse.png_hcm.swatch" />
+    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Normal.png_hcm.swatch" />
+    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Specular.png_hcm.swatch" />
+    <None Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\.mayaSwatches\CosmicWasp_BaseColor.png_hcm.swatch" />
+    <None Include="Content\Images\Players\plasmaShot.psd" />
+    <None Include="Content\Images\Players\plasmaShotBlue.psd" />
+    <None Include="Content\Music\Axelay_Kick_My_Axe_OC_ReMix.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\3d\CosmicWasp\CW_Textures\BlackAndNeonGreen\CosmicWasp_BaseColor.png" />
@@ -204,61 +270,40 @@
     <Content Include="Content\Images\Players\Red\cw_red_min.txt" />
     <Content Include="Content\Maps\w1.txt" />
     <Content Include="Content\Maps\w1_map.txt" />
-    <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="app.manifest" />
-    <None Include="Content\3d\CosmicWasp\.mayaSwatches\cw_blue.mb.swatches" />
-    <None Include="Content\3d\CosmicWasp\CosmicWasp.FBX" />
-    <None Include="Content\3d\CosmicWasp\CosmicWasp.obj" />
-    <None Include="Content\3d\CosmicWasp\cw_blue.mb" />
-    <None Include="Content\3d\CosmicWasp\cw_ghost.mb" />
-    <None Include="Content\3d\CosmicWasp\cw_green.mb" />
-    <None Include="Content\3d\CosmicWasp\cw_red.mb" />
-    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Diffuse.png_hcm.swatch" />
-    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Normal.png_hcm.swatch" />
-    <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Specular.png_hcm.swatch" />
-    <None Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\.mayaSwatches\CosmicWasp_BaseColor.png_hcm.swatch" />
-    <None Include="Content\bin\DesktopGL\Music\Axelay_Kick_My_Axe_OC_ReMix.ogg" />
-    <None Include="Content\bin\DesktopGL\Music\Axelay_Kick_My_Axe_OC_ReMix.xnb" />
-    <None Include="Content\Images\Players\plasmaShot.psd" />
-    <None Include="Content\Images\Players\plasmaShotBlue.psd" />
-    <None Include="Content\Music\Axelay_Kick_My_Axe_OC_ReMix.ogg" />
-    <None Include="Content\obj\DesktopGL\.mgcontent" />
-    <None Include="Content\obj\DesktopGL\Music\Axelay_Kick_My_Axe_OC_ReMix.mgcontent" />
-  </ItemGroup>
-  <ItemGroup>
+    <Folder Include="Content\bin\DesktopGL\Music\" />
+    <Folder Include="Content\obj\DesktopGL\Music\" />
     <Folder Include="Source\World\Rounds\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rmdir /s "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content"
+    <PostBuildEvent>rmdir /s "$(SolutionDir)$(ProjectName)\bin\A\Release\Content"
 
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content"
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images"
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Bg"
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Enemy"
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Other"
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players"
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Blue"
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Red"
-mkdir "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Maps"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Bg"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Enemy"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Other"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Blue"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Red"
+mkdir "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Maps"
 
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Maps\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Maps"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Bg\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Bg\*.png"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Bg\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Bg\*.txt"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Enemy\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Enemy\*.png"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Enemy\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Enemy\*.txt"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Other\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Other\*.png"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Other\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Other\*.txt"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\*.png"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\*.txt"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Blue\*.png"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Blue\*.txt"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.png" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Red\*.png"
-copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.txt" "$(SolutionDir)$(ProjectName)\bin\Windows\x86\Release\Content\Images\Players\Red\*.txt"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Maps\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Maps"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Bg\*.png" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Bg\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Bg\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Bg\*.txt"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Enemy\*.png" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Enemy\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Enemy\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Enemy\*.txt"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Other\*.png" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Other\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Other\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Other\*.txt"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\*.png" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\*.txt"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.png" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Blue\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Blue\*.txt"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.png" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Red\*.png"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Red\*.txt"
 
 </PostBuildEvent>
   </PropertyGroup>
