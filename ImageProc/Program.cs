@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing.Imaging;
 
 namespace ImageProc
@@ -12,24 +8,40 @@ namespace ImageProc
     class Program
     {
         static void Main(string[] args)
+        {            
+            Console.WriteLine("----------------- Image Processing -------------");
+            Console.WriteLine(">> Cmd (build for all)");
+
+            // ---------------------------------------------------------------------------
+            // minimizar numero de arquivos em um ( +- 50% tamanho, +- 80% tempo load)
+            // ---------------------------------------------------------------------------
+
+            var dest = Console.ReadLine();  // "Players\\Blue"
+
+            if (dest == "build")
+            {
+                Proc("Players\\Blue", "cw_blue");
+                Proc("Players\\Red", "cw_red");
+                Console.WriteLine();
+                Console.WriteLine(">> ------ Build Complete! ------------");
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine(">> Prefixo do arquivo");
+
+                var prefix = Console.ReadLine();
+
+                Proc(dest, prefix);
+            }
+        }
+
+        static void Proc (string destino, string prefix )
         {
             string BaseApp = "TstMG1";
             string currentDir = Directory.GetCurrentDirectory() + "\\" + BaseApp + "\\Content\\Images\\";
-
-            Console.WriteLine("-----------------");
-            Console.WriteLine(currentDir);
-            Console.WriteLine("----------------- Players\\Blue");
-            Console.WriteLine();
-
-            // -----------------------------------------
-            // minimizar numero de arquivos em um
-            // -----------------------------------------
-
-            Console.WriteLine(">> Diretorio de Lote de arquivos destino (Players\\Blue)");
-            var dest = Console.ReadLine();  // "Players\\Blue"
-
-            string  dir = currentDir + dest,
-                    prefix = "cw_blue";
+            currentDir = currentDir.Replace("ImageProc\\bin\\Release\\", "");
+            string dir = currentDir + destino;                    
 
             Console.WriteLine(dir);
 
@@ -38,12 +50,6 @@ namespace ImageProc
                 Console.WriteLine("Diretório não existe");
                 return;
             }
-
-            Console.WriteLine(">> Prefixo do arquivo");
-
-            dest = Console.ReadLine();
-
-            prefix = dest;
 
             var sample = new Bitmap(dir + "\\" + prefix + (new DirectoryInfo(dir).GetFiles().Length < 100 ? "01.png" : "0001.png"));
 
@@ -98,6 +104,7 @@ namespace ImageProc
             File.Move("test.png", fileTargetName);
 
             Console.WriteLine(" >> Salvo com sucesso! ");
+            Console.WriteLine();
         }
     }
 }

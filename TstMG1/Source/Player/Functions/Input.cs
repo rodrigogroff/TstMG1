@@ -7,8 +7,9 @@ namespace GameSystem
 	{
 		public void ProcInput()
 		{
-			var gps = GamePad.GetState(PlayerIndex.One);
-			var kbs = Keyboard.GetState();
+            var kbs = Keyboard.GetState();
+
+            var gps = GamePad.GetState(PlayerIndex.One);			
 
 			if (myPlayer == PlayerSelection.PlayerTwo)
 				gps = GamePad.GetState(PlayerIndex.Two);
@@ -26,24 +27,27 @@ namespace GameSystem
 			if (MyGlobalPosition.Y < MyWorld.MyGlobalPosition.Y + MyWorld.go.virtualHeight - 135 ) CanGoDown = true;
 			if (MyGlobalPosition.X < MyWorld.MyGlobalPosition.X + MyWorld.go.virtualWidth - 135) CanGoRight = true;
 
-			if (myPlayer == PlayerSelection.PlayerOne)
-			{
-				if (kbs.IsKeyDown(Keys.W) || kbs.IsKeyDown(Keys.Up)) { if (CanGoUp) MyGlobalPosition.Y -= speed; IsUp = true; }
-				if (kbs.IsKeyDown(Keys.A) || kbs.IsKeyDown(Keys.Left)) if (CanGoLeft) MyGlobalPosition.X -= speed;
-				if (kbs.IsKeyDown(Keys.S) || kbs.IsKeyDown(Keys.Down)) { if (CanGoDown) MyGlobalPosition.Y += speed; IsDown = true; }
-				if (kbs.IsKeyDown(Keys.D) || kbs.IsKeyDown(Keys.Right)) if (CanGoRight) MyGlobalPosition.X += speed;
+            if (!gps.IsConnected)
+            {
+                if (myPlayer == PlayerSelection.PlayerOne)
+                {
+                    if (kbs.IsKeyDown(Keys.W) || kbs.IsKeyDown(Keys.Up)) { if (CanGoUp) MyGlobalPosition.Y -= speed; IsUp = true; }
+                    if (kbs.IsKeyDown(Keys.A) || kbs.IsKeyDown(Keys.Left)) if (CanGoLeft) MyGlobalPosition.X -= speed;
+                    if (kbs.IsKeyDown(Keys.S) || kbs.IsKeyDown(Keys.Down)) { if (CanGoDown) MyGlobalPosition.Y += speed; IsDown = true; }
+                    if (kbs.IsKeyDown(Keys.D) || kbs.IsKeyDown(Keys.Right)) if (CanGoRight) MyGlobalPosition.X += speed;
 
-				if (kbs.IsKeyDown(Keys.J) || kbs.IsKeyDown(Keys.Z)) if (!IsAutoFire) { fireTimer = 0; IsAutoFire = true; }
-			}
-			else if (myPlayer == PlayerSelection.PlayerTwo)
-			{
-				if (kbs.IsKeyDown(Keys.T) || kbs.IsKeyDown(Keys.Up)) { if (CanGoUp) MyGlobalPosition.Y -= speed; IsUp = true; }
-				if (kbs.IsKeyDown(Keys.F) || kbs.IsKeyDown(Keys.Left)) if (CanGoLeft) MyGlobalPosition.X -= speed;
-				if (kbs.IsKeyDown(Keys.G) || kbs.IsKeyDown(Keys.Down)) { if (CanGoDown) MyGlobalPosition.Y += speed; IsDown = true; }
-				if (kbs.IsKeyDown(Keys.H) || kbs.IsKeyDown(Keys.Right)) if (CanGoRight) MyGlobalPosition.X += speed;
+                    if (kbs.IsKeyDown(Keys.J) || kbs.IsKeyDown(Keys.Z)) if (!IsAutoFire) { fireTimer = 0; IsAutoFire = true; }
+                }
+                else if (myPlayer == PlayerSelection.PlayerTwo)
+                {
+                    if (kbs.IsKeyDown(Keys.T) || kbs.IsKeyDown(Keys.Up)) { if (CanGoUp) MyGlobalPosition.Y -= speed; IsUp = true; }
+                    if (kbs.IsKeyDown(Keys.F) || kbs.IsKeyDown(Keys.Left)) if (CanGoLeft) MyGlobalPosition.X -= speed;
+                    if (kbs.IsKeyDown(Keys.G) || kbs.IsKeyDown(Keys.Down)) { if (CanGoDown) MyGlobalPosition.Y += speed; IsDown = true; }
+                    if (kbs.IsKeyDown(Keys.H) || kbs.IsKeyDown(Keys.Right)) if (CanGoRight) MyGlobalPosition.X += speed;
 
-				if (kbs.IsKeyDown(Keys.K) || kbs.IsKeyDown(Keys.Z)) if (!IsAutoFire) { fireTimer = 0; IsAutoFire = true; }
-			}
+                    if (kbs.IsKeyDown(Keys.K) || kbs.IsKeyDown(Keys.Z)) if (!IsAutoFire) { fireTimer = 0; IsAutoFire = true; }
+                }
+            }
 
 			// special keys
 
