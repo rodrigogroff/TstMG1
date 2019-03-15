@@ -9,17 +9,11 @@ namespace GameSystem
 		{
             var kbs = Keyboard.GetState();
 
-            GamePadState gps;
-            
-            gps = GamePad.GetState(PlayerIndex.One);
+            GamePadState gps = GamePad.GetState(PlayerIndex.One);
 
-            if (!gps.IsConnected)
+            if (this.myPlayer == PlayerSelection.PlayerTwo)
 				gps = GamePad.GetState(PlayerIndex.Two);
-            else if (!gps.IsConnected)
-                gps = GamePad.GetState(PlayerIndex.Three);
-            else if (!gps.IsConnected)
-                gps = GamePad.GetState(PlayerIndex.Four);                       
-
+            
             IsUp = false; IsDown = false;
 
 			bool CanGoUp = false,
