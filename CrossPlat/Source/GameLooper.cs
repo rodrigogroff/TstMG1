@@ -16,10 +16,11 @@ namespace GameSystem
                    virtualHeight = 1080;
     }
 
-    class SmartFramerate
+    public class SmartFramerate
     {
-        double currentFrametimes;
-        double weight;
+        #region - code - 
+
+        double currentFrametimes, weight;
         int numerator;
 
         public double framerate
@@ -41,19 +42,22 @@ namespace GameSystem
             currentFrametimes = currentFrametimes / weight;
             currentFrametimes += timeSinceLastFrame;
         }
+
+        #endregion
     }
 
     public class GameLooper : Game
 	{
 		GameOptions go = new GameOptions();
+        SmartFramerate smartFPS = new SmartFramerate(1);
 
-		GraphicsDeviceManager gdm;
+        GraphicsDeviceManager gdm;
 		RenderTarget2D rTarget;
 		BaseWorld gameWorld;
-		Rectangle destRect;		
-		SpriteBatch batch;
-        SmartFramerate smartFPS = new SmartFramerate(5);
+		SpriteBatch batch;        
         SpriteFont font;
+
+        Rectangle destRect;
 
         public GameLooper()
 		{
@@ -108,14 +112,13 @@ namespace GameSystem
 				
 		protected override void Update(GameTime gameTime)
 		{
-            smartFPS.Update(gameTime.ElapsedGameTime.TotalSeconds);
-
             #region - code - 
 
-            if (gameWorld == null)
-                return;
+            if (gameWorld == null) return;
 
-			try
+            smartFPS.Update(gameTime.ElapsedGameTime.TotalSeconds);
+
+            try
 			{
 				if (gameWorld.ChangeScreen)
 				{
@@ -132,9 +135,7 @@ namespace GameSystem
 
 				if (gameWorld.ExitGame)
 					Exit();
-
-				gameWorld.UpdateCollisions();
-				gameWorld.Terminate();
+				
 				gameWorld.Update();
 			}
 			catch (Exception ex)
@@ -151,23 +152,35 @@ namespace GameSystem
 
             try
 			{
-				// render to virtual console resolution
-				GraphicsDevice.SetRenderTarget(rTarget);
+                // -------------------------------------------
+                // render to virtual resolution
+                // -------------------------------------------
+
+                #region - code - 
+
+                GraphicsDevice.SetRenderTarget(rTarget);
 				GraphicsDevice.Clear(Color.Black);
 				batch.Begin(blendState: BlendState.NonPremultiplied);
 				gameWorld.Draw(batch);
-
                 batch.DrawString(font, "FPS:" + smartFPS.framerate.ToString("00"), new Vector2(10, 10), Color.White);
-                
                 batch.End();
-				GraphicsDevice.SetRenderTarget(null);
 
-				// render to full screen
-				GraphicsDevice.Clear(Color.Black);
+                #endregion
+
+                // -------------------------------------------
+                // render to full screen
+                // -------------------------------------------
+
+                #region - code - 
+
+                GraphicsDevice.SetRenderTarget(null);
+                GraphicsDevice.Clear(Color.Black);
 				batch.Begin();
 				batch.Draw(rTarget, destRect, gameWorld.worldColor);
 				batch.End();
-			}
+
+                #endregion
+            }
 			catch (Exception ex)
 			{
 				SaveException(ex);

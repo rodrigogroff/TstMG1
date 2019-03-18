@@ -16,7 +16,8 @@ namespace GameSystem
 
 		public override void Update()
 		{
-			if (IsPaused) return;
+            UpdateCollisions();
+            Terminate();
 			
 			if (xWorldSpeed != xDesiredSpeed)
 			{
