@@ -12,8 +12,8 @@ namespace GameSystem
         public ImageLoader im = new ImageLoader();
         public ImageLibrary imageLibrary = new ImageLibrary();
 
-        public int virtualWidth = 960,
-                   virtualHeight = 540;
+        public int virtualWidth = 1920,
+                   virtualHeight = 1080;
     }
 
     public class GameLooper : Game
@@ -35,11 +35,11 @@ namespace GameSystem
 			go.gdm = gdm;
 			gdm.IsFullScreen = true;
             gdm.SynchronizeWithVerticalRetrace = true;
-
+            
             if (gdm.IsFullScreen)
 			{
-				gdm.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-				gdm.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                gdm.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                gdm.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 			}
 			else
 			{
@@ -119,21 +119,31 @@ namespace GameSystem
 
             try
 			{
-				// render to virtual console resolution
-				GraphicsDevice.SetRenderTarget(rTarget);
-				GraphicsDevice.Clear(Color.Black);
-				batch.Begin(blendState: BlendState.NonPremultiplied);
-				gameWorld.Draw(batch);
-				batch.End();
-				GraphicsDevice.SetRenderTarget(null);
+                GraphicsDevice.Clear(Color.Black);
+
+                batch.Begin(blendState: BlendState.NonPremultiplied);
+                gameWorld.Draw(batch);
+                batch.End();
+
+                #region - old - 
+                /*
+                // render to virtual console resolution
+                //GraphicsDevice.SetRenderTarget(rTarget);
+                //GraphicsDevice.Clear(Color.Black);
+                //batch.Begin(blendState: BlendState.NonPremultiplied);
+                //gameWorld.Draw(batch);
+				//batch.End();
+				//GraphicsDevice.SetRenderTarget(null);
 
 				// render to full screen
-				GraphicsDevice.Clear(Color.Black);
-				batch.Begin();
-				batch.Draw(rTarget, destRect, gameWorld.worldColor);
-				batch.End();
-			}
-			catch (Exception ex)
+				//GraphicsDevice.Clear(Color.Black);
+				//batch.Begin();
+				//batch.Draw(rTarget, destRect, gameWorld.worldColor);
+				//batch.End();
+                */
+                #endregion
+            }
+            catch (Exception ex)
 			{
 				SaveException(ex);
 			}
