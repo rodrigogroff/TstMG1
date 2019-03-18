@@ -12,8 +12,35 @@ namespace GameSystem
         public ImageLoader im = new ImageLoader();
         public ImageLibrary imageLibrary = new ImageLibrary();
 
-        public int virtualWidth = 960,
-                   virtualHeight = 540;
+        public int virtualWidth = 1920,
+                   virtualHeight = 1080;
+    }
+
+    class SmartFramerate
+    {
+        double currentFrametimes;
+        double weight;
+        int numerator;
+
+        public double framerate
+        {
+            get
+            {
+                return (numerator / currentFrametimes);
+            }
+        }
+
+        public SmartFramerate(int oldFrameWeight)
+        {
+            numerator = oldFrameWeight;
+            weight = (double)oldFrameWeight / ((double)oldFrameWeight - 1d);
+        }
+
+        public void Update(double timeSinceLastFrame)
+        {
+            currentFrametimes = currentFrametimes / weight;
+            currentFrametimes += timeSinceLastFrame;
+        }
     }
 
     public class GameLooper : Game
@@ -25,8 +52,10 @@ namespace GameSystem
 		BaseWorld gameWorld;
 		Rectangle destRect;		
 		SpriteBatch batch;
-		
-		public GameLooper()
+        SmartFramerate smartFPS = new SmartFramerate(5);
+        SpriteFont font;
+
+        public GameLooper()
 		{
             #region - code - 
 
@@ -65,8 +94,9 @@ namespace GameSystem
 				batch = new SpriteBatch(GraphicsDevice);
 				rTarget = new RenderTarget2D(GraphicsDevice, go.virtualWidth, go.virtualHeight, false, sf, DepthFormat.Depth24);
 				destRect = new Rectangle(0, 0, gdm.PreferredBackBufferWidth, gdm.PreferredBackBufferHeight);
-				
-				gameWorld = new GameMap(Content,"w1.txt", true, go);
+                font = Content.Load<SpriteFont>("MainFont");
+
+                gameWorld = new GameMap(Content,"w1.txt", true, go);
 			}
 			catch (Exception ex )
 			{
@@ -78,6 +108,8 @@ namespace GameSystem
 				
 		protected override void Update(GameTime gameTime)
 		{
+            smartFPS.Update(gameTime.ElapsedGameTime.TotalSeconds);
+
             #region - code - 
 
             if (gameWorld == null)
@@ -124,7 +156,10 @@ namespace GameSystem
 				GraphicsDevice.Clear(Color.Black);
 				batch.Begin(blendState: BlendState.NonPremultiplied);
 				gameWorld.Draw(batch);
-				batch.End();
+
+                batch.DrawString(font, "FPS:" + smartFPS.framerate.ToString("00"), new Vector2(10, 10), Color.White);
+                
+                batch.End();
 				GraphicsDevice.SetRenderTarget(null);
 
 				// render to full screen
