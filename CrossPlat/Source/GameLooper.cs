@@ -14,6 +14,8 @@ namespace GameSystem
 
         public int virtualWidth = 1920,
                    virtualHeight = 1080;
+
+        public bool fullScreen = false;
     }
 
     public class SmartFramerate
@@ -66,7 +68,7 @@ namespace GameSystem
             gdm = new GraphicsDeviceManager(this);
 
 			go.gdm = gdm;
-			gdm.IsFullScreen = true;
+			gdm.IsFullScreen = go.fullScreen;
             gdm.SynchronizeWithVerticalRetrace = true;
 
             if (gdm.IsFullScreen)

@@ -18,10 +18,10 @@ namespace GameSystem
 
 						float xMov = 0, yMov = 0;
 
-						if (this_xPivotPoint < block_xPivotPoint) xMov = -speed;
-						if (this_xPivotPoint > block_xPivotPoint) xMov = speed;
-						if (this_yPivotPoint < block_yPivotPoint) yMov = -speed;
-						if (this_yPivotPoint > block_yPivotPoint) yMov = speed;
+						if (this_xPivotPoint < block_xPivotPoint) xMov = -30;
+						if (this_xPivotPoint > block_xPivotPoint) xMov = 30;
+						if (this_yPivotPoint < block_yPivotPoint) yMov = -30;
+						if (this_yPivotPoint > block_yPivotPoint) yMov = 30;
 
 						UpdatePosition(xMov, yMov);
 
