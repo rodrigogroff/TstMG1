@@ -51,7 +51,7 @@ namespace GameSystem
     public class GameLooper : Game
 	{
 		GameOptions go = new GameOptions();
-        SmartFramerate smartFPS = new SmartFramerate(30);
+        SmartFramerate smartFPS = new SmartFramerate(5);
 
         GraphicsDeviceManager gdm;
 		RenderTarget2D rTarget;
@@ -61,7 +61,7 @@ namespace GameSystem
 
         Rectangle destRect;
 
-        public GameLooper()
+        public GameLooper(int refreshFreq)
 		{
             #region - code - 
 
@@ -71,11 +71,14 @@ namespace GameSystem
 			gdm.IsFullScreen = go.fullScreen;
             gdm.SynchronizeWithVerticalRetrace = true;
 
+            this.IsFixedTimeStep = false;
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / refreshFreq);
+
             if (gdm.IsFullScreen)
 			{
 				gdm.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
 				gdm.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-			}
+            }
 			else
 			{
 				gdm.PreferredBackBufferWidth = go.virtualWidth;
