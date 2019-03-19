@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
 
 namespace GameSystem
@@ -76,6 +74,8 @@ namespace GameSystem
         [STAThread]
         static void Main()
         {
+            #region - windows - 
+
             var dm = new DEVMODE1
             {
                 dmDeviceName = new String(new char[32]),
@@ -86,19 +86,10 @@ namespace GameSystem
 
             User_32.EnumDisplaySettings(null, User_32.ENUM_CURRENT_SETTINGS, ref dm);
 
-            //if (dm.dmDisplayFrequency != 60)
-            //{
-            //    var file = "log.txt";
-            //    if (File.Exists(file)) File.Delete(file);
-            //    using (var s = new StreamWriter(file, false, System.Text.Encoding.Unicode))
-            //        s.Write("Your monitor needs to be set a 60hz");
-            //    Process.Start("notepad.exe", file);                                   
-            //}
-            //else
-            {
-                using (var game = new GameLooper(dm.dmDisplayFrequency))
-                    game.Run();
-            }
+            #endregion
+
+            using (var game = new GameLooper(dm.dmDisplayFrequency))
+                game.Run();
         }
     }
 }
