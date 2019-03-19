@@ -49,7 +49,7 @@ namespace GameSystem
     public class GameLooper : Game
 	{
 		GameOptions go = new GameOptions();
-        SmartFramerate smartFPS = new SmartFramerate(1);
+        SmartFramerate smartFPS = new SmartFramerate(30);
 
         GraphicsDeviceManager gdm;
 		RenderTarget2D rTarget;

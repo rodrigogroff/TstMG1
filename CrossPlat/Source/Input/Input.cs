@@ -16,10 +16,13 @@ namespace GameSystem
             
             IsUp = false; IsDown = false;
 
-			bool CanGoUp = false,
-				 CanGoLeft = false,
-				 CanGoRight = false,
-				 CanGoDown = false;
+            bool CanGoUp = false,
+                 CanGoLeft = false,
+                 CanGoRight = false,
+                 CanGoDown = false,
+                 moveLeft = false, moveRight = false;
+
+            float steps = 0;
 
 			if (MyGlobalPosition.Y > MyWorld.MyGlobalPosition.Y ) CanGoUp = true;
 			if (MyGlobalPosition.X > MyWorld.MyGlobalPosition.X ) CanGoLeft = true;
@@ -32,9 +35,10 @@ namespace GameSystem
                 if (myPlayer == PlayerSelection.PlayerOne)
                 {
                     if (kbs.IsKeyDown(Keys.W) || kbs.IsKeyDown(Keys.Up)) { if (CanGoUp) MyGlobalPosition.Y -= speed; IsUp = true; }
-                    if (kbs.IsKeyDown(Keys.A) || kbs.IsKeyDown(Keys.Left)) if (CanGoLeft) MyGlobalPosition.X -= speed;
-                    if (kbs.IsKeyDown(Keys.S) || kbs.IsKeyDown(Keys.Down)) { if (CanGoDown) MyGlobalPosition.Y += speed; IsDown = true; }
-                    if (kbs.IsKeyDown(Keys.D) || kbs.IsKeyDown(Keys.Right)) if (CanGoRight) MyGlobalPosition.X += speed;
+                     if (kbs.IsKeyDown(Keys.A) || kbs.IsKeyDown(Keys.Left)) if (CanGoLeft) { moveLeft = true; }
+                        if (kbs.IsKeyDown(Keys.S) || kbs.IsKeyDown(Keys.Down)) { if (CanGoDown) MyGlobalPosition.Y += speed; IsDown = true; }
+                        if (kbs.IsKeyDown(Keys.D) || kbs.IsKeyDown(Keys.Right)) if (CanGoRight) { moveRight = true; }
+                        
 
                     if (kbs.IsKeyDown(Keys.J) || kbs.IsKeyDown(Keys.Z)) if (!IsAutoFire) { fireTimer = 0; IsAutoFire = true; }
                 }
@@ -59,16 +63,36 @@ namespace GameSystem
 			if (gps.IsConnected) // joypad
 			{
 				if (gps.DPad.Up == ButtonState.Pressed) { if (CanGoUp) MyGlobalPosition.Y -= speed; IsUp = true; }
-				if (gps.DPad.Left == ButtonState.Pressed) if (CanGoLeft) MyGlobalPosition.X -= speed;
-				if (gps.DPad.Right == ButtonState.Pressed) if (CanGoDown) MyGlobalPosition.X += speed;
-				if (gps.DPad.Down == ButtonState.Pressed) { if (CanGoRight) MyGlobalPosition.Y += speed; IsDown = true; }
+				if (gps.DPad.Left == ButtonState.Pressed) if (CanGoLeft) moveLeft = true; 
+				if (gps.DPad.Right == ButtonState.Pressed) if (CanGoDown) moveRight = true; 
+                if (gps.DPad.Down == ButtonState.Pressed) { if (CanGoRight) MyGlobalPosition.Y += speed; IsDown = true; }
 
 				if (gps.Buttons.A == ButtonState.Pressed) if (!IsAutoFire) { fireTimer = 0; IsAutoFire = true; }
                 if (gps.Buttons.B == ButtonState.Pressed) { }
 				if (gps.Buttons.X == ButtonState.Pressed) { }
 				if (gps.Buttons.Y == ButtonState.Pressed) { }
 			}
-		}
+
+            if (accelX > 8) accelX = 8;
+
+            switch (accelX)
+            {
+                case 1: steps = 0.1F; break;
+                case 2: steps = 0.2F; break;
+                case 3: steps = 0.3F; break;
+                case 4: steps = 0.5F; break;
+                case 5: steps = 0.8F; break;
+                case 6: steps = 1.0F; break;
+                case 7: steps = 1.2F; break;
+                case 8: steps = 1.8F; break;
+            }
+
+            if (moveRight) { MyGlobalPosition.X += speed + steps; accelX++; }
+            if (moveLeft) { MyGlobalPosition.X -= speed + steps; accelX++; }
+
+            if (!moveRight && !moveLeft)
+                accelX = 1;
+        }
 
 		public void DeployOption()
 		{
