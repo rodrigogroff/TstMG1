@@ -71,6 +71,7 @@ namespace ImageProc
             Console.WriteLine(" totHeight => " + totHeight);
             
             int totXSizeMax = 0;
+            int minY = 99999, maxY = 0;
 
             using (var sw = new StreamWriter(fileTargetNameMap))
             {
@@ -79,7 +80,7 @@ namespace ImageProc
                     var currentFrame = dir + "\\" + prefix + (totFrames < 100 ? i.ToString("00") : i.ToString("000")) + ".png";
                     var sampleItem = new Bitmap(currentFrame);
                    
-                    int minX = 99999, maxX = 0;
+                    int minX = 99999, maxX = 0;                   
 
                     for (int y = 0; y < totHeight; y++)
                         for (int x = 0; x < widthPadrao; ++x)
@@ -90,6 +91,9 @@ namespace ImageProc
                             {
                                 if (x < minX) minX = x;
                                 if (x > maxX) maxX = x;
+
+                                if (y < minY) minY = y;
+                                if (y > maxY) maxY = y;
                             }
                         }
 
@@ -99,7 +103,7 @@ namespace ImageProc
 
             FileInfo fi = new FileInfo(fileTargetName);
             FileStream fstr = fi.Create();
-            Bitmap finalBitmap = new Bitmap(totXSizeMax, totHeight);
+            Bitmap finalBitmap = new Bitmap(totXSizeMax, maxY - minY);
             fstr.Close();
             fi.Delete();
 
@@ -133,15 +137,15 @@ namespace ImageProc
 
                         int curSafeWidth = maxX - minX;
 
-                        Rectangle destRegion = new Rectangle(xCustomAcc, 0, curSafeWidth, totHeight);
-                        Rectangle srcRegion = new Rectangle(minX, 0, curSafeWidth, totHeight);
+                        Rectangle destRegion = new Rectangle(xCustomAcc, 0, curSafeWidth, maxY - minY);
+                        Rectangle srcRegion = new Rectangle(minX, minY, curSafeWidth, maxY - minY);
 
                         sw.Write(destRegion.X.ToString()); sw.Write(",");
                         sw.Write(destRegion.Y.ToString()); sw.Write(",");
                         sw.Write(destRegion.Width.ToString()); sw.Write(",");
                         sw.Write(destRegion.Height.ToString()); sw.Write(",");
                         sw.Write(minX); sw.Write(",");
-                        sw.Write("0"); sw.Write(";");
+                        sw.Write(minY); sw.Write(";");
 
                         grD.DrawImage(sampleItem, destRegion, srcRegion, GraphicsUnit.Pixel);
 
