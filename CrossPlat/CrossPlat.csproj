@@ -161,6 +161,7 @@
     <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Normal.png_hcm.swatch" />
     <None Include="Content\3d\CosmicWasp\CW_Textures\BlueAndWhite\.mayaSwatches\CosmicWasp_Specular.png_hcm.swatch" />
     <None Include="Content\3d\CosmicWasp\CW_Textures\RedAndBlack\.mayaSwatches\CosmicWasp_BaseColor.png_hcm.swatch" />
+    <None Include="Content\bin\DesktopGL\Content\mainFont.xnb" />
     <None Include="Content\Images\Players\plasmaShot.psd" />
     <None Include="Content\Images\Players\plasmaShotBlue.psd" />
     <None Include="Content\mainFont.spritefont" />
@@ -565,6 +566,7 @@ copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.png" "$(Solu
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Blue\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Blue\*.txt"
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.png" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Red\*.png"
 copy /Y "$(SolutionDir)$(ProjectName)\Content\Images\Players\Red\*.txt" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\Content\Images\Players\Red\*.txt"
+copy /Y "$(SolutionDir)$(ProjectName)\Content\bin\DesktopGL\Content\*.xnb" "$(SolutionDir)$(ProjectName)\bin\DesktopGL\AnyCPU\Release\*.xnb"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

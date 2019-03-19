@@ -27,7 +27,7 @@ namespace GameSystem
 			}
 		}
 
-		public List<Texture2D> LoadImageSequence(string prefix, int frames, ref GraphicsDeviceManager gdm)
+		public List<Texture2D> LoadImageSequence(string prefix, int frames, ref GraphicsDeviceManager gdm, ref List<int> framesDx, ref List<int> framesDy)
 		{
 			var lst = new List<Texture2D>();
 			int maskSize = frames.ToString().Length;
@@ -35,13 +35,18 @@ namespace GameSystem
 			string path = currentDir + prefix;
 			
 			for (int t = 1; t <= frames; ++t)
-				using (var fileStream = new FileStream(path + t.ToString("".PadLeft(maskSize, '0')) + ".png", FileMode.Open))
-					lst.Add(Texture2D.FromStream(gdm.GraphicsDevice, fileStream));
+                using (var fileStream = new FileStream(path + t.ToString("".PadLeft(maskSize, '0')) + ".png", FileMode.Open))
+                {
+                    // distance from left x
+                    framesDx.Add(0);
+                    framesDy.Add(0);
+                    lst.Add(Texture2D.FromStream(gdm.GraphicsDevice, fileStream));
+                }                    
 
 			return lst;
 		}
 
-        public List<Texture2D> LoadImageMappedSequence(string prefix, int frames, ref GraphicsDeviceManager gdm)
+        public List<Texture2D> LoadImageMappedSequence(string prefix, int frames, ref GraphicsDeviceManager gdm, ref List<int> framesDx, ref List<int> framesDy)
         {
             var lst = new List<Texture2D>();
             var log = new List<string>();
@@ -59,12 +64,12 @@ namespace GameSystem
                     {
                         using (var sr = new StreamReader(pathMap))
                         {
-                            var contents = sr.ReadToEnd();  //0,0,105,110;105,0,105,110;
+                            var contents = sr.ReadToEnd(); 
                             var lstMap = contents.Split(';');
 
                             for (int indexImg = 1; indexImg <= frames; ++indexImg)
                             {                                
-                                var contentItem = lstMap[indexImg - 1]; //0,0,105,110
+                                var contentItem = lstMap[indexImg - 1];
                                 var rectStr = contentItem.Split(',');
 
                                 var rect = new Rectangle( Convert.ToInt32(rectStr[0]),  // X
@@ -72,7 +77,12 @@ namespace GameSystem
                                                           Convert.ToInt32(rectStr[2]),  // WIDTH
                                                           Convert.ToInt32(rectStr[3])); // HEIGHT
 
-                                var newTexture = new Texture2D(gdm.GraphicsDevice, rect.Width, rect.Height);
+                                // distance from left x
+                                framesDx.Add(Convert.ToInt32(rectStr[4]));
+                                // distance from top x
+                                framesDy.Add(Convert.ToInt32(rectStr[5]));
+
+                                var newTexture = new Texture2D(gdm.GraphicsDevice, rect.Width, rect.Height );
 
                                 int count = rect.Width * rect.Height;
                                 Color[] data = new Color[count];
@@ -82,7 +92,7 @@ namespace GameSystem
                                 lst.Add(newTexture);
                             }
                         }
-                    }
+                    }                    
                 }
             }
             catch (SystemException ex)

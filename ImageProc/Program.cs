@@ -21,7 +21,7 @@ namespace ImageProc
             if (dest == "build")
             {
                 ProcX("Players\\Blue", "cw_blue");
-                Proc("Players\\Red", "cw_red");
+                ProcX("Players\\Red", "cw_red");
 
                 Console.WriteLine();
                 Console.WriteLine(">> ------ Build Complete! ------------");
@@ -69,10 +69,37 @@ namespace ImageProc
             Console.WriteLine(" widthPadrao => " + widthPadrao);
             Console.WriteLine(" totFrames => " + totFrames);
             Console.WriteLine(" totHeight => " + totHeight);
+            
+            int totXSizeMax = 0;
+
+            using (var sw = new StreamWriter(fileTargetNameMap))
+            {
+                for (int i = 1; i <= totFrames; i++)
+                {
+                    var currentFrame = dir + "\\" + prefix + (totFrames < 100 ? i.ToString("00") : i.ToString("000")) + ".png";
+                    var sampleItem = new Bitmap(currentFrame);
+                   
+                    int minX = 99999, maxX = 0;
+
+                    for (int y = 0; y < totHeight; y++)
+                        for (int x = 0; x < widthPadrao; ++x)
+                        {
+                            Color utd = sampleItem.GetPixel(x, y);
+
+                            if (utd.A > 0)
+                            {
+                                if (x < minX) minX = x;
+                                if (x > maxX) maxX = x;
+                            }
+                        }
+
+                    totXSizeMax += maxX - minX;
+                }
+            }
 
             FileInfo fi = new FileInfo(fileTargetName);
             FileStream fstr = fi.Create();
-            Bitmap finalBitmap = new Bitmap(widthPadrao * totFrames, totHeight);
+            Bitmap finalBitmap = new Bitmap(totXSizeMax, totHeight);
             fstr.Close();
             fi.Delete();
 
@@ -112,7 +139,9 @@ namespace ImageProc
                         sw.Write(destRegion.X.ToString()); sw.Write(",");
                         sw.Write(destRegion.Y.ToString()); sw.Write(",");
                         sw.Write(destRegion.Width.ToString()); sw.Write(",");
-                        sw.Write(destRegion.Height.ToString()); sw.Write(";");
+                        sw.Write(destRegion.Height.ToString()); sw.Write(",");
+                        sw.Write(minX); sw.Write(",");
+                        sw.Write("0"); sw.Write(";");
 
                         grD.DrawImage(sampleItem, destRegion, srcRegion, GraphicsUnit.Pixel);
 
@@ -200,6 +229,8 @@ namespace ImageProc
                         sw.Write(destRegion.Y.ToString()); sw.Write(",");
                         sw.Write(destRegion.Width.ToString()); sw.Write(",");
                         sw.Write(destRegion.Height.ToString()); sw.Write(";");
+                        sw.Write("0"); sw.Write(",");
+                        sw.Write("0"); sw.Write(";");
 
                         grD.DrawImage(sampleItem, destRegion, srcRegion, GraphicsUnit.Pixel);
                     }

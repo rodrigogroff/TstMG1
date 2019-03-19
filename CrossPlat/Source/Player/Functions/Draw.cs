@@ -6,7 +6,15 @@ namespace GameSystem
 	{
 		public override void Draw(SpriteBatch sb)
 		{
-			sb.Draw(lstSpaceShipImg[curFrame], GetLocalPosition(), opaqueColor);
+            {
+                var retImg = lstSpaceShipImg[curFrame];
+                var rectDest = GetLocalPosition();
+
+                rectDest.X += framesDx[curFrame];
+                rectDest.Y += framesDy[curFrame];
+
+                sb.Draw(retImg, rectDest, opaqueColor);
+            }
 
 			lstPlasmaFire.ForEach(y => y.Draw(sb));
 			lstOption.ForEach(y => y.Draw(sb));
